@@ -1,0 +1,49 @@
+module bank {
+
+    // Account representation (CORBA Struct)
+    struct Account {
+        string id;
+        string owner;
+        double balance;
+        string currency;
+        string status; // ACTIVE or SUSPENDED
+    };
+
+    // Transaction outcome representation (CORBA Struct)
+    struct TransferResult {
+        string transactionId;
+        Account sourceAccount;
+        Account destAccount;
+        double amount;
+        long long timestamp;
+    };
+
+    // Exceptions raised by the service operations
+    exception AccountNotFoundException {
+        string message;
+        string invalidId;
+    };
+
+    exception InsufficientFundsException {
+        string message;
+        double requestedAmount;
+        double currentBalance;  sss
+    };
+
+    exception InvalidAmountException {
+        string message;
+        double invalidAmount;
+    };
+
+    //Bank Service Interface
+    interface BankService {
+        Account createAccount(in string owner, in double initialDeposit) raises (InvalidAmountException);
+        Account getAccount(in string id) raises (AccountNotFoundException);
+        Account deposit(in string id, in double amount) raises (AccountNotFoundException, InvalidAmountException);
+        Account withdraw(in string id, in double amount) raises (AccountNotFoundException, InsufficientFundsException, InvalidAmountException);
+        TransferResult transfer(in string fromId, in string toId, in double amount) raises (AccountNotFoundException, InsufficientFundsException, InvalidAmountException);
+        
+        typedef sequence<Account> AccountList;
+        AccountList getAllAccounts();
+    };
+};
