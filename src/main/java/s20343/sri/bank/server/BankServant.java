@@ -1,17 +1,9 @@
 package s20343.sri.bank.server;
-
 import bank.*;
-
-
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * BankServant is the concrete CORBA servant implementing the BankService interface.
- * Implements standard banking operations and handles custom IDL structures & exceptions.
- */
 public class BankServant extends BankServicePOA {
 
     private final Map<String, Account> accounts = new ConcurrentHashMap<>();
