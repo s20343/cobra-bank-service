@@ -1,15 +1,13 @@
 module bank {
 
-    // Account representation (CORBA Struct)
     struct Account {
         string id;
         string owner;
         double balance;
         string currency;
-        string status; // ACTIVE or SUSPENDED
+        string status;
     };
 
-    // Transaction outcome representation (CORBA Struct)
     struct TransferResult {
         string transactionId;
         Account sourceAccount;
@@ -18,7 +16,6 @@ module bank {
         long long timestamp;
     };
 
-    // Exceptions raised by the service operations
     exception AccountNotFoundException {
         string message;
         string invalidId;
@@ -27,7 +24,7 @@ module bank {
     exception InsufficientFundsException {
         string message;
         double requestedAmount;
-        double currentBalance; 
+        double currentBalance;
     };
 
     exception InvalidAmountException {
@@ -35,7 +32,6 @@ module bank {
         double invalidAmount;
     };
 
-    //Bank Service Interface
     interface BankService {
         Account createAccount(in string owner, in double initialDeposit) raises (InvalidAmountException);
         Account getAccount(in string id) raises (AccountNotFoundException);

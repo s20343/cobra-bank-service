@@ -106,7 +106,7 @@ public class BankServant extends BankServicePOA {
             throw new InvalidAmountException("Cannot transfer to the same account", amount);
         }
 
-        // Standard 2-phase verification of resources to simulate a safe transaction
+        // Standard 2 phase verification of resources to simulate a safe transaction
         Account source = getAccount(fromId);
         Account destination = getAccount(toId);
 
