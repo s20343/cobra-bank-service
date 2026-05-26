@@ -27,7 +27,7 @@ module bank {
     exception InsufficientFundsException {
         string message;
         double requestedAmount;
-        double currentBalance;  sss
+        double currentBalance; 
     };
 
     exception InvalidAmountException {
